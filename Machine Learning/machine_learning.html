@@ -1,0 +1,202 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Machine Learning Blog</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            /* Start with column layout for mobile */
+            width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: 100%;
+            background: #f0f0f0;
+            padding: 10px;
+            padding-bottom: 5px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            transition: height 0.3s ease;
+            font-size: small;
+            max-height: 20vh;
+        }
+
+        .sidebar h2 {
+            margin-top: 3px;
+            margin-left: 30px;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: black;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .topic {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sub-topics {
+            display: none;
+            padding-left: 20px;
+            background: #e0e0e0;
+        }
+
+        .sub-topics div {
+            padding: 5px 0;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .sub-topics .disabled {
+            color: gray;
+            cursor: not-allowed;
+        }
+
+        .topic:hover .sub-topics {
+            display: block;
+        }
+
+        #content-section {
+            padding: 0px;
+            background-color: #ffffff;
+            overflow: hidden;
+            transition: margin-top 0.3s ease;
+        }
+
+        #content-frame {
+            height: 100%;
+            width: 100%;
+            border: none;
+            overflow-y: auto;
+            margin-top: 0pt;
+            min-height: 500pt;
+        }
+
+        /* Media Queries */
+        @media only screen and (min-width: 600px) {
+            body {
+                flex-direction: row;
+                /* Change to row layout for larger screens */
+                transition: width 0.3s ease;
+                height: 600pt;
+                overflow-y: visible;
+            }
+
+            .sidebar h2 {
+                margin-top: 3px;
+                margin-left: 30px;
+            }
+
+            .sidebar {
+                width: 300px;
+                /* Reset height for desktop */
+                font-size: medium;
+                padding-bottom: 10px;
+                height: 100vh;
+            }
+
+            .collapsed {
+                width: 0px;
+                /* Collapse height */
+            }
+
+            #content-section {
+                margin-left: 0;
+                flex: 1;
+                min-height: 600pt;
+                /* Reset margin */
+            }
+
+            .collapsed+#content-section {
+                margin-left: 0px;
+                /* Adjust for collapsed sidebar on desktop */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        <h2><b>Machine Learning</b></h2>
+        <be>
+            <div class="topic"
+                onclick="loadContent('https://htmlpreview.github.io/?https://github.com/Pruthvi-Batta/data-science-blog/blob/main/Machine%20Learning/WhatisMachineLearning.html')">
+                Introduction
+            </div>
+            <div class="topic">
+                Environment Setup
+                <div class="sub-topics">
+                    <div class="disabled">Tools/Software Required</div>
+                    <div class="disabled">Anaconda installation</div>
+                    <div class="disabled">Jupyter Notebooks</div>
+                </div>
+            </div>
+            <div class="topic">
+                Basic Python
+                <div class="sub-topics">
+                    <div class="disabled">Python Introduction</div>
+                    <div class="disabled">Data types and Variables</div>
+                    <div class="disabled">Loops and Condition statements</div>
+                    <div class="disabled">Functions and Modules</div>
+                </div>
+            </div>
+            <div class="topic">
+                Python for Data Science
+                <div class="sub-topics">
+                    <div class="disabled">Introduction</div>
+                    <div class="disabled">Numpy</div>
+                    <div class="disabled">Pandas</div>
+                    <div class="disabled">Matplotlib</div>
+                    <div class="disabled">Scipy</div>
+                </div>
+            </div>
+            <div class="topic">
+                Probability and Statistics
+                <div class="sub-topics">
+                    <div class="disabled">Probability</div>
+                    <div class="disabled">Conditional Probability</div>
+                    <div class="disabled">Statistics</div>
+                    <div class="disabled">Confidence Intervals</div>
+                    <div class="disabled">Hypothesis Testing</div>
+                </div>
+            </div>
+    </div>
+
+</body>
+<div id="content-section">
+    <iframe id="content-frame"
+        src="https://htmlpreview.github.io/?https://github.com/Pruthvi-Batta/data-science-blog/blob/main/Machine%20Learning/WhatisMachineLearning.html"></iframe>
+</div>
+
+
+<script>
+    function toggleSidebar() {
+        var sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('collapsed');
+    }
+
+    function loadContent(url) {
+        document.getElementById('content-frame').src = url;
+    }
+
+    // Force a reflow on load to fix initial mobile layout issue
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            window.dispatchEvent(new Event('resize'));
+        }, 100);
+    });
+</script>
